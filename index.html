@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Feliz San Valentín, Mi Amor</title>
+  <style>
+    /* Estilos generales */
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    
+    /* Corazón animado */
+    .heart {
+      font-size: 100px;
+      color: #e63946;
+      animation: beat 1s infinite;
+      margin-bottom: 20px;
+    }
+    
+    @keyframes beat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+    
+    /* Imágenes decorativas en esquinas */
+    .decorative {
+      position: absolute;
+      width: 80px;
+      opacity: 0.7;
+      animation: float 4s infinite ease-in-out;
+    }
+    
+    .top-left {
+      top: 10px;
+      left: 10px;
+    }
+    
+    .bottom-right {
+      bottom: 10px;
+      right: 10px;
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0); }
+    }
+    
+    /* Caja de regalo (gift box) */
+    .gift-box {
+      cursor: pointer;
+      width: 100px;
+      animation: bounce 2s infinite;
+      margin-bottom: 20px;
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    
+    /* Modal popup */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: none; /* Oculto por defecto */
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+    }
+    
+    .modal-content {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 80%;
+      text-align: center;
+    }
+    
+    .close-modal {
+      margin-top: 20px;
+      padding: 8px 16px;
+      background: #ff99aa;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    
+    .close-modal:hover {
+      background: #ff7f90;
+    }
+  </style>
+</head>
+<body>
+  <!-- Imágenes decorativas en las esquinas -->
+  <img src="https://img.icons8.com/emoji/96/000000/red-heart.png" class="decorative top-left" alt="Corazón decorativo">
+  <img src="https://img.icons8.com/emoji/96/000000/red-heart.png" class="decorative bottom-right" alt="Corazón decorativo">
+  
+  <!-- Corazón animado -->
+  <div class="heart">❤️</div>
+  
+  <!-- Caja de regalo que actúa como disparador del popup -->
+  <img src="https://img.icons8.com/emoji/96/000000/wrapped-gift.png" class="gift-box" alt="Caja de regalo">
+  
+  <!-- Modal popup -->
+  <div id="modal" class="modal-overlay">
+    <div class="modal-content">
+      <p>
+        ¡Feliz San Valentín, mi amor! <br>
+        Eres la luz que ilumina mis días y la paz que llena mi alma. <br>
+        Gracias por cada sonrisa y por estar siempre a mi lado.
+      </p>
+      <button class="close-modal" id="closeModal">Cerrar</button>
+    </div>
+  </div>
+  
+  <script>
+    // Mostrar el modal al hacer clic en la caja de regalo
+    document.querySelector('.gift-box').addEventListener('click', function() {
+      document.getElementById('modal').style.display = 'flex';
+    });
+    
+    // Cerrar el modal al hacer clic en el botón "Cerrar"
+    document.getElementById('closeModal').addEventListener('click', function() {
+      document.getElementById('modal').style.display = 'none';
+    });
+  </script>
+</body>
+</html>
+
