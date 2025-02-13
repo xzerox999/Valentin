@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Feliz San Valentín, Mi Amor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     /* Estilos generales */
     body {
@@ -19,20 +20,20 @@
       align-items: center;
       position: relative;
     }
-    
-    /* Corazón animado */
+
+    /* Corazón animado (más grande) */
     .heart {
-      font-size: 100px;
+      font-size: 140px;
       color: #e63946;
       animation: beat 1s infinite;
       margin-bottom: 20px;
     }
-    
+
     @keyframes beat {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.2); }
     }
-    
+
     /* Imágenes decorativas en esquinas */
     .decorative {
       position: absolute;
@@ -40,23 +41,23 @@
       opacity: 0.7;
       animation: float 4s infinite ease-in-out;
     }
-    
+
     .top-left {
       top: 10px;
       left: 10px;
     }
-    
+
     .bottom-right {
       bottom: 10px;
       right: 10px;
     }
-    
+
     @keyframes float {
       0% { transform: translateY(0); }
       50% { transform: translateY(-20px); }
       100% { transform: translateY(0); }
     }
-    
+
     /* Caja de regalo (gift box) */
     .gift-box {
       cursor: pointer;
@@ -64,12 +65,12 @@
       animation: bounce 2s infinite;
       margin-bottom: 20px;
     }
-    
+
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-20px); }
     }
-    
+
     /* Modal popup */
     .modal-overlay {
       position: fixed;
@@ -82,16 +83,21 @@
       justify-content: center;
       align-items: center;
       z-index: 10;
+      padding: 20px; /* Espacio para dispositivos pequeños */
     }
-    
+
     .modal-content {
       background: #fff;
       padding: 20px;
       border-radius: 10px;
-      max-width: 80%;
+      max-width: 400px; /* Ancho máximo fijo */
+      width: 90%; /* Ancho relativo para responsividad */
       text-align: center;
+      box-sizing: border-box;
+      overflow-y: auto; /* Permite desplazamiento vertical si el contenido es largo */
+      max-height: 80vh; /* Altura máxima para evitar que el modal sea demasiado grande */
     }
-    
+
     .close-modal {
       margin-top: 20px;
       padding: 8px 16px;
@@ -101,46 +107,311 @@
       cursor: pointer;
       font-size: 16px;
     }
-    
+
     .close-modal:hover {
       background: #ff7f90;
+    }
+
+    /* Texto animado dentro del modal */
+    #animated-text {
+      font-size: 18px;
+      line-height: 1.5; /* Espaciado entre líneas */
+      word-wrap: break-word; /* Asegura que las palabras largas se ajusten */
+      white-space: normal; /* Permite saltos de línea automáticos */
+      margin-bottom: 20px;
+    }
+
+    /* Carousel dentro del modal */
+    .carousel {
+      position: relative;
+      max-width: 100%;
+      margin: 20px auto;
+      overflow: hidden;
+    }
+
+    .carousel .slide {
+      display: none;
+      width: 100%;
+    }
+
+    .carousel .slide.active {
+      display: block;
+    }
+
+    /* Estilo para las imágenes dentro del carrusel */
+    .carousel img {
+      width: 100%; /* Ancho completo del contenedor */
+      height: 300px; /* Altura fija */
+      object-fit: cover; /* Ajusta la imagen manteniendo su proporción */
+      border-radius: 10px; /* Bordes redondeados */
+    }
+
+    .carousel button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.8);
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      font-size: 24px;
+    }
+
+    .carousel .prev {
+      left: 10px;
+    }
+
+    .carousel .next {
+      right: 10px;
+    }
+
+    /* Corazones flotantes */
+    @keyframes float-heart {
+      0% { transform: translateY(0) translateX(0); opacity: 1; }
+      50% { transform: translateY(-20px) translateX(10px); opacity: 0.8; }
+      100% { transform: translateY(0) translateX(-10px); opacity: 1; }
+    }
+
+    .heart-particle {
+      position: absolute;
+      font-size: 24px;
+      color: #e63946;
+      animation: float-heart 5s infinite ease-in-out;
+      pointer-events: none;
+    }
+
+    /* Crear varios corazones */
+    .heart-1 { top: 10%; left: 20%; animation-delay: 0s; }
+    .heart-2 { top: 30%; left: 50%; animation-delay: 1s; }
+    .heart-3 { top: 50%; left: 70%; animation-delay: 2s; }
+    .heart-4 { top: 70%; left: 30%; animation-delay: 3s; }
+
+    /* Contenedor de fondo animado */
+    .background-slideshow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .background-slideshow img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+    }
+
+    .background-slideshow img.active {
+      opacity: 1;
+    }
+
+    /* Reloj de cuenta regresiva */
+    #countdown {
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: #e63946;
+    }
+
+    /* Media Queries para responsividad */
+    @media (max-width: 600px) {
+      .heart {
+        font-size: 100px;
+      }
+
+      .gift-box {
+        width: 80px;
+      }
+
+      .decorative {
+        width: 60px;
+      }
+
+      .modal-content {
+        max-width: 90%;
+        font-size: 14px;
+      }
+
+      .carousel img {
+        height: 200px; /* Altura reducida para dispositivos pequeños */
+      }
+
+      .carousel button {
+        width: 30px;
+        height: 30px;
+        font-size: 18px;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Fondo animado -->
+  <!--<div class="background-slideshow">
+    <img src="https://example.com/image1.jpg" class="active" alt="Fondo 1">
+    <img src="https://example.com/image2.jpg" alt="Fondo 2">
+    <img src="https://example.com/image3.jpg" alt="Fondo 3">
+  </div>-->
+
+  <!-- Corazones flotantes -->
+  <div class="heart-particle heart-1">❤️</div>
+  <div class="heart-particle heart-2">❤️</div>
+  <div class="heart-particle heart-3">❤️</div>
+  <div class="heart-particle heart-4">❤️</div>
+
   <!-- Imágenes decorativas en las esquinas -->
   <img src="https://img.icons8.com/emoji/96/000000/red-heart.png" class="decorative top-left" alt="Corazón decorativo">
   <img src="https://img.icons8.com/emoji/96/000000/red-heart.png" class="decorative bottom-right" alt="Corazón decorativo">
-  
+
   <!-- Corazón animado -->
   <div class="heart">❤️</div>
-  
+
+  <!-- Reloj de cuenta regresiva -->
+  <!--<div id="countdown">
+    <span id="days"></span> días, 
+    <span id="hours"></span> horas, 
+    <span id="minutes"></span> minutos, 
+    <span id="seconds"></span> segundos.
+  </div>-->
+
   <!-- Caja de regalo que actúa como disparador del popup -->
   <img src="https://img.icons8.com/emoji/96/000000/wrapped-gift.png" class="gift-box" alt="Caja de regalo">
-  
+
   <!-- Modal popup -->
   <div id="modal" class="modal-overlay">
     <div class="modal-content">
-      <p>
-        ¡Feliz San Valentín, mi amor! <br>
-        Eres la luz que ilumina mis días y la paz que llena mi alma. <br>
-        Gracias por cada sonrisa y por estar siempre a mi lado.
-      </p>
+      <p id="animated-text"></p>
+      <!-- Carrusel dentro del modal -->
+      <div class="carousel">
+        <img src="https://scontent-lim1-1.xx.fbcdn.net/v/t1.6435-9/30221702_1909944809046749_4803287318410559488_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=94e2a3&_nc_eui2=AeFJzRig4qFoEnuCYt-MgHydRmGESp4aKSlGYYRKnhopKeI_9z4KrQirZQevaM3HBK0&_nc_ohc=TD8j2nHOEQ4Q7kNvgFDp1vY&_nc_zt=23&_nc_ht=scontent-lim1-1.xx&_nc_gid=A8Edl4oG5-W2swNT_QBQqIY&oh=00_AYCvLeJ6Gv2ZAL1t4lrWnS4XAgJkhHGUmL3r2pG0pOjDAw&oe=67D58FA8" class="slide active" alt="Slide 1">
+        <img src="https://imgs.search.brave.com/EtNVzKdInIH6FFb6NnIiHwAWKPgUlD3_fc58wNAp6E4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NTFxbE4zenROYkwu/anBn" class="slide" alt="Slide 2">
+        <img src="https://imgs.search.brave.com/NkXVfdAxUgX1IRHrvYJMRR_wxJ1ANtphke3sOoKXt-8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMuZGlhcmlvZmVt/ZW5pbm8uY29tL21l/ZGlhLzQxMjMzL2Zy/YXNlcy1ib25pdGFz/LWdyYWNpb3Nhcy1z/YW4tdmFsZW50aW4u/anBn" class="slide" alt="Slide 3">
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+      </div>
       <button class="close-modal" id="closeModal">Cerrar</button>
     </div>
   </div>
-  
+
+  <!-- Biblioteca de confeti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+  <!-- Música de fondo -->
+  <!--<audio id="background-music" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop></audio>-->
+
   <script>
-    // Mostrar el modal al hacer clic en la caja de regalo
-    document.querySelector('.gift-box').addEventListener('click', function() {
-      document.getElementById('modal').style.display = 'flex';
-    });
-    
-    // Cerrar el modal al hacer clic en el botón "Cerrar"
-    document.getElementById('closeModal').addEventListener('click', function() {
-      document.getElementById('modal').style.display = 'none';
+    // Esperar a que el DOM esté completamente cargado
+    document.addEventListener('DOMContentLoaded', () => {
+      const audio = document.getElementById('background-music');
+
+      // Lanzar confeti y reproducir música al abrir el modal
+      document.querySelector('.gift-box').addEventListener('click', function() {
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ['#ff99aa', '#e63946', '#ffc3a0']
+        });
+
+        if (audio) {
+          audio.play(); // Reproduce música al abrir el modal
+        }
+
+        document.getElementById('modal').style.display = 'flex';
+      });
+
+      // Detener música al cerrar el modal
+      document.getElementById('closeModal').addEventListener('click', function() {
+        if (audio) {
+          audio.pause();
+          audio.currentTime = 0;
+        }
+        document.getElementById('modal').style.display = 'none';
+      });
+
+      // Animación de texto
+      const text = "¡Feliz San Valentín, mi amor!  Cada día que pasa me doy cuenta de cuánto te extraño y de lo mucho que me gustaría verte de nuevo, te extraño más de lo que las palabras pueden decir.";
+      let index = 0;
+      const animatedText = document.getElementById('animated-text');
+
+      function typeWriter() {
+        if (index < text.length) {
+          animatedText.innerHTML += text.charAt(index);
+          index++;
+          setTimeout(typeWriter, 50); // Velocidad de escritura
+        }
+      }
+
+      document.querySelector('.gift-box').addEventListener('click', function() {
+        typeWriter();
+      });
+
+      // Cambio de fondo dinámico
+      const images = document.querySelectorAll('.background-slideshow img');
+      let currentIndex = 0;
+
+      function changeBackground() {
+        images[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % images.length;
+        images[currentIndex].classList.add('active');
+      }
+
+      setInterval(changeBackground, 5000); // Cambia cada 5 segundos
+
+      // Reloj de cuenta regresiva
+      const countdownDate = new Date("Feb 14, 2024 00:00:00").getTime();
+
+      const updateCountdown = () => {
+        const now = new Date().getTime();
+        const distance = countdownDate - now;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById('days').innerText = days;
+        document.getElementById('hours').innerText = hours;
+        document.getElementById('minutes').innerText = minutes;
+        document.getElementById('seconds').innerText = seconds;
+
+        if (distance < 0) {
+          clearInterval(interval);
+          document.getElementById('countdown').innerHTML = "¡Es el día!";
+        }
+      };
+
+      const interval = setInterval(updateCountdown, 1000);
+
+      // Funcionalidad del carrusel
+      let slideIndex = 0;
+      const slides = document.querySelectorAll('.slide');
+      const totalSlides = slides.length;
+
+      function showSlide(index) {
+        slides.forEach((slide, i) => {
+          slide.classList.remove('active');
+          if(i === index) {
+            slide.classList.add('active');
+          }
+        });
+      }
+
+      document.querySelector('.next').addEventListener('click', function() {
+        slideIndex = (slideIndex + 1) % totalSlides;
+        showSlide(slideIndex);
+      });
+
+      document.querySelector('.prev').addEventListener('click', function() {
+        slideIndex = (slideIndex - 1 + totalSlides) % totalSlides;
+        showSlide(slideIndex);
+      });
     });
   </script>
 </body>
 </html>
-
